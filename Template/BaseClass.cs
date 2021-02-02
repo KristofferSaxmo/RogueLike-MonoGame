@@ -1,10 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Template
 {
@@ -17,6 +12,8 @@ namespace Template
         protected Vector2 direction;
         protected float speed;
         protected int health;
+        protected int damage;
+        protected int rateOfFire;
 
         public Rectangle Rectangle
         {
@@ -46,6 +43,16 @@ namespace Template
         {
             get { return health; }
             set { health = value; }
+        }
+        public int Damage
+        {
+            get { return damage; }
+            set { damage = value; }
+        }
+        public int RateOfFire
+        {
+            get { return rateOfFire; }
+            set { rateOfFire = value; }
         }
 
         public virtual void Update() { }
