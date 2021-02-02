@@ -6,9 +6,9 @@ namespace Template
     class Bullet : BaseClass
     {
         Vector2 origin = new Vector2(9, 4);
-        Rectangle sourceRectangle = new Rectangle(0, 0, 18, 8);
         public Bullet(Texture2D bulletTex, Vector2 bulletPos, Point size, float bulletRot, Vector2 bulletDir, float bulletSpeed)
         {
+            sourceRectangle = new Rectangle(0, 0, bulletTex.Width, bulletTex.Height);
             texture = bulletTex;
             position = bulletPos;
             rectangle = new Rectangle(bulletPos.ToPoint(), size);

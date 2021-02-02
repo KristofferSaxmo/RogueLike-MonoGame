@@ -49,9 +49,8 @@ namespace Template
             crosshairTex = Content.Load<Texture2D>("crosshair");
 
             bulletTex = Content.Load<Texture2D>("bullet");
-
-            gun = new Gun(1, 30);
-
+            gunTex = Content.Load<Texture2D>("gunLeft");
+            gun = new Gun(gunTex, 1, 30);
             walls.Add(new Wall(defaultTex, new Vector2(400, 400), new Point(200, 200)));
             walls.Add(new Wall(defaultTex, new Vector2(600, 400), new Point(200, 200)));
             walls.Add(new Wall(defaultTex, new Vector2(600, 600), new Point(200, 200)));

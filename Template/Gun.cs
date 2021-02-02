@@ -8,9 +8,6 @@ namespace Template
 {
     class Gun : BaseClass
     {
-        Vector2 rightOrigin = new Vector2(0, 8);
-        Vector2 leftOrigin = new Vector2(26, 8);
-
         float leftRotation;
         float rightRotation;
 
@@ -19,10 +16,11 @@ namespace Template
 
         int shootCooldown;
 
-        Rectangle sourceRectangle = new Rectangle(0, 0, 26, 16);
-
-        public Gun(int gunDamage, int gunRateOfFire)
+        public Gun(Texture2D gunTex, int gunDamage, int gunRateOfFire)
         {
+            sourceRectangle = new Rectangle(0, 0, gunTex.Width, gunTex.Height);
+            leftOrigin = new Vector2(gunTex.Width, gunTex.Height / 2);
+            rightOrigin = new Vector2(0, gunTex.Height / 2);
             damage = gunDamage;
             rateOfFire = gunRateOfFire;
         }

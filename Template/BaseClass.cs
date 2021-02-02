@@ -8,6 +8,9 @@ namespace Template
         protected Texture2D texture;
         protected Vector2 position;
         protected Rectangle rectangle;
+        protected Rectangle sourceRectangle;
+        protected Vector2 leftOrigin;
+        protected Vector2 rightOrigin;
         protected float rotation;
         protected Vector2 direction;
         protected float speed;
@@ -18,6 +21,20 @@ namespace Template
         public Rectangle Rectangle
         {
             get { return rectangle; }
+        }
+        public Rectangle SourceRectangle
+        {
+            get { return sourceRectangle; }
+        }
+        public Vector2 LeftOrigin
+        {
+            get { return leftOrigin; }
+            set { leftOrigin = value; }
+        }
+        public Vector2 RightOrigin
+        {
+            get { return rightOrigin; }
+            set { rightOrigin = value; }
         }
         public Vector2 Position
         {
