@@ -58,17 +58,25 @@ namespace Template
             player.Update();
             for (int i = 0; i < walls.Count; i++) // Kollision med väggar
             {
-                if (player.Rectangle.Intersects(walls[i].Rectangle) && recordPlayerPos.X < walls[i].Position.X + player.Rectangle.Width)
-                    player.Position = new Vector2(walls[i].Position.X - player.Rectangle.Width - 1, player.Position.Y);
+                if (player.Rectangle.Intersects(walls[i].Rectangle) && recordPlayerRec.Left < walls[i].Rectangle.Left) // Left wall
+                    player.Position = new Vector2(
+                        walls[i].Rectangle.Left - player.Rectangle.Width, // X
+                        player.Position.Y); // Y
 
-                if (player.Rectangle.Intersects(walls[i].Rectangle) && recordPlayerPos.X > walls[i].Position.X + walls[i].Rectangle.Width)
-                    player.Position = new Vector2(walls[i].Position.X + walls[i].Rectangle.Width + 1, player.Position.Y);
+                else if (player.Rectangle.Intersects(walls[i].Rectangle) && recordPlayerRec.Right > walls[i].Rectangle.Right) // Right wall
+                    player.Position = new Vector2(
+                        walls[i].Rectangle.Right, // X
+                        player.Position.Y); // Y
 
-                if (player.Rectangle.Intersects(walls[i].Rectangle) && recordPlayerPos.Y < walls[i].Position.Y)
-                    player.Position = new Vector2(player.Position.X, walls[i].Position.Y - player.Rectangle.Height + 1);
+                else if (player.Rectangle.Intersects(walls[i].Rectangle) && recordPlayerRec.Top < walls[i].Rectangle.Top) // Top Wall
+                    player.Position = new Vector2(
+                        player.Position.X, // X
+                        walls[i].Rectangle.Top - player.Rectangle.Height); // Y
 
-                if (player.Rectangle.Intersects(walls[i].Rectangle) && recordPlayerPos.Y > walls[i].Position.Y + walls[i].Rectangle.Height + player.Rectangle.Height)
-                    player.Position = new Vector2(player.Position.X, walls[i].Position.Y + walls[i].Rectangle.Height);
+                else if (player.Rectangle.Intersects(walls[i].Rectangle) && recordPlayerRec.Bottom > walls[i].Rectangle.Bottom) // Bottom Wall
+                    player.Position = new Vector2(
+                        player.Position.X, // X
+                        walls[i].Rectangle.Bottom); // Y
             }
             player.UpdateHitbox();
 
