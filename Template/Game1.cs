@@ -16,7 +16,7 @@ namespace Template
         Player player;
         List<Wall> walls = new List<Wall>();
 
-        Vector2 recordPlayerPos;
+        Rectangle recordPlayerRec;
 
         KeyboardState keyboardState = Keyboard.GetState();
 
@@ -42,7 +42,13 @@ namespace Template
             defaultTex.SetData(new Color[1] { Color.White });
             
             player = new Player(defaultTex, new Vector2(500, 100), new Point(30, 30));
-            walls.Add(new Wall(defaultTex, new Vector2(200, 200), new Point(500, 500)));
+            walls.Add(new Wall(defaultTex, new Vector2(400, 400), new Point(200, 200)));
+            walls.Add(new Wall(defaultTex, new Vector2(600, 400), new Point(200, 200)));
+            walls.Add(new Wall(defaultTex, new Vector2(600, 600), new Point(200, 200)));
+            walls.Add(new Wall(defaultTex, new Vector2(800, 400), new Point(200, 200)));
+            walls.Add(new Wall(defaultTex, new Vector2(600, 200), new Point(200, 200)));
+            walls.Add(new Wall(defaultTex, new Vector2(1000, 400), new Point(200, 200)));
+            walls.Add(new Wall(defaultTex, new Vector2(1210, 400), new Point(200, 200)));
         }
 
         protected override void UnloadContent()
@@ -54,7 +60,7 @@ namespace Template
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            recordPlayerPos = player.Position;
+            recordPlayerRec = player.Rectangle;
             player.Update();
             for (int i = 0; i < walls.Count; i++) // Kollision med väggar
             {

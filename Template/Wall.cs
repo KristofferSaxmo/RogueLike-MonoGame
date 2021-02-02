@@ -18,7 +18,7 @@ namespace Template
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, rectangle, Color.White);
+            spriteBatch.Draw(texture, rectangle, Color.MintCream);
         }
     }
 }
