@@ -38,7 +38,7 @@ namespace Template
                 bullets.Add(new Bullet(
                     bulletTex, // Texture
                     new Vector2(position.X + gunOffset, position.Y), // Position
-                    new Point(18, 8), // Size
+                    new Point(2, 2), // Size
                     (float)Math.Atan2(bulletDir.Y, bulletDir.X), // Rotation
                     new Vector2((float)Math.Cos(bulletRot), (float)Math.Sin(bulletRot)), // Direction
                     15)); // Speed

@@ -86,8 +86,6 @@ namespace Template
                 gun.Shoot(bullets, bulletTex, gunTex.Width);
             }
 
-            gun.Update(player.Position, gunTex);
-
             for (int i = 0; i < bullets.Count; i++) // Move bullets
             {
                 bullets[i].Move();
@@ -125,6 +123,8 @@ namespace Template
                 }
             }
             player.UpdateHitbox();
+
+            gun.Update(player.Position, gunTex);
 
             base.Update(gameTime);
         }
