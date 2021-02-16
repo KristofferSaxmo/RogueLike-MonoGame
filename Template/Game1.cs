@@ -14,6 +14,7 @@ namespace Template
 
         Player player;
         Gun gun;
+        Camera camera;
         List<Bullet> bullets = new List<Bullet>();
         List<Wall> walls = new List<Wall>();
 
@@ -35,6 +36,7 @@ namespace Template
             graphics.PreferredBackBufferWidth = 1920;
             graphics.PreferredBackBufferHeight = 1080;
             graphics.ApplyChanges();
+            camera = new Camera(GraphicsDevice.Viewport);
         }
         
         protected override void LoadContent()
@@ -44,7 +46,7 @@ namespace Template
             defaultTex = new Texture2D(GraphicsDevice, 1, 1);
             defaultTex.SetData(new Color[1] { Color.White });
             
-            player = new Player(defaultTex, new Vector2(500, 100), new Point(30, 30));
+            player = new Player(defaultTex, new Vector2(0, 0), new Point(30, 30));
 
             crosshairTex = Content.Load<Texture2D>("crosshair");
 
@@ -72,6 +74,10 @@ namespace Template
 
             recordPlayerRec = player.Rectangle;
             player.Update();
+
+            camera.MoveCamera(player.Position);
+
+            camera.UpdateCamera(GraphicsDevice.Viewport);
 
             if (mouseState.X < player.Position.X + (player.Rectangle.Width) / 2) // Is the player turned left?
             {
@@ -133,7 +139,7 @@ namespace Template
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.Transform);
 
             for (int i = 0; i < bullets.Count; i++) // Draw bullets
             {
@@ -153,8 +159,11 @@ namespace Template
             else
                 gun.DrawRight(spriteBatch); // Draw right gun
 
-            spriteBatch.Draw(crosshairTex, new Vector2(mouseState.X - 10, mouseState.Y - 10), Color.Black); // Draw crosshair
+            
 
+            spriteBatch.End();
+            spriteBatch.Begin();
+            spriteBatch.Draw(crosshairTex, new Vector2(mouseState.X - 10, mouseState.Y - 10), Color.Black); // Draw crosshair
             spriteBatch.End();
 
             base.Draw(gameTime);
