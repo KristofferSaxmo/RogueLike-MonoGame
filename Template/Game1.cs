@@ -75,10 +75,6 @@ namespace Template
             recordPlayerRec = player.Rectangle;
             player.Update();
 
-            camera.MoveCamera(player.Position);
-
-            camera.UpdateCamera(GraphicsDevice.Viewport);
-
             if (mouseState.X < player.Position.X + (player.Rectangle.Width) / 2) // Is the player turned left?
             {
                 isTurnedLeft = true; // Yes
@@ -132,6 +128,10 @@ namespace Template
 
             gun.Update(player.Position, gunTex);
 
+            camera.MoveCamera(player.Position);
+
+            camera.UpdateCamera(GraphicsDevice.Viewport);
+
             base.Update(gameTime);
         }
 
@@ -139,7 +139,7 @@ namespace Template
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.Transform);
+            spriteBatch.Begin(transformMatrix: camera.Transform);
 
             for (int i = 0; i < bullets.Count; i++) // Draw bullets
             {
@@ -157,13 +157,14 @@ namespace Template
                 gun.DrawLeft(spriteBatch); // Draw left gun
 
             else
-                gun.DrawRight(spriteBatch); // Draw right gun
-
-            
+                gun.DrawRight(spriteBatch); // Draw right gun            
 
             spriteBatch.End();
+
             spriteBatch.Begin();
+
             spriteBatch.Draw(crosshairTex, new Vector2(mouseState.X - 10, mouseState.Y - 10), Color.Black); // Draw crosshair
+
             spriteBatch.End();
 
             base.Draw(gameTime);
