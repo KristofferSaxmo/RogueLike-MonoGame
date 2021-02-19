@@ -12,7 +12,7 @@ namespace Template
         float rightRotation;
 
         float bulletRot;
-        Vector2 bulletDir;
+        Vector2 bulletDir, targetWorldPosition;
 
         int shootCooldown;
 
@@ -29,8 +29,8 @@ namespace Template
             var mouseState = Mouse.GetState();
             if (shootCooldown == 0 && mouseState.LeftButton == ButtonState.Pressed)
             {
-                bulletDir.X = mouseState.X - position.X - gunOffset;
-                bulletDir.Y = mouseState.Y - position.Y;
+                bulletDir.X = targetWorldPosition.X - position.X - gunOffset;
+                bulletDir.Y = targetWorldPosition.Y - position.Y;
                 bulletDir.Normalize();
 
                 bulletRot = (float)Math.Atan2(bulletDir.Y, bulletDir.X);
@@ -48,14 +48,16 @@ namespace Template
             else if (shootCooldown > 0)
                 shootCooldown--;
         }
-        public void Update(Vector2 playerPos, Texture2D gunTex)
+        public void Update(Camera camera, Vector2 cameraPos, Vector2 playerPos, Texture2D gunTex)
         {
+            targetWorldPosition = camera.GetWorldPosition(
+            new Vector2(Mouse.GetState().X, Mouse.GetState().Y));
+
             position = playerPos;
             texture = gunTex;
-            var mouseState = Mouse.GetState();
 
-            direction.X = mouseState.X - position.X;
-            direction.Y = mouseState.Y - position.Y;
+            direction.X = targetWorldPosition.X - position.X;
+            direction.Y = targetWorldPosition.Y - position.Y;
             direction.Normalize();
 
             leftRotation = (float)Math.Atan2(0 - direction.Y, 0 - direction.X);   // Left angle

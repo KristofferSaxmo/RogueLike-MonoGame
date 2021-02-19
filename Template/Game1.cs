@@ -57,7 +57,7 @@ namespace Template
             walls.Add(new Wall(defaultTex, new Vector2(800, 400), new Point(200, 200)));
             walls.Add(new Wall(defaultTex, new Vector2(600, 200), new Point(200, 200)));
             walls.Add(new Wall(defaultTex, new Vector2(1000, 400), new Point(200, 200)));
-            walls.Add(new Wall(defaultTex, new Vector2(1210, 400), new Point(200, 200)));
+            walls.Add(new Wall(defaultTex, new Vector2(1225, 400), new Point(200, 200)));
         }
 
         protected override void UnloadContent() { }
@@ -72,7 +72,7 @@ namespace Template
 
             player.Update(walls);
 
-            if (mouseState.X < player.Position.X + (player.Rectangle.Width) / 2) // Is the player turned left?
+            if (camera.GetWorldPosition(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)).X < player.Position.X + (player.Rectangle.Width) / 2) // Is the player turned left?
             {
                 isTurnedLeft = true; // Yes
                 gunTex = Content.Load<Texture2D>("gunLeft");
@@ -103,7 +103,7 @@ namespace Template
             }
             player.UpdateHitbox();
 
-            gun.Update(player.Position, gunTex);
+            gun.Update(camera, camera.Position, player.Position, gunTex);
 
             camera.MoveCamera(player.Position);
 
@@ -134,7 +134,7 @@ namespace Template
                 gun.DrawLeft(spriteBatch); // Draw left gun
 
             else
-                gun.DrawRight(spriteBatch); // Draw right gun            
+                gun.DrawRight(spriteBatch); // Draw right gun     
 
             spriteBatch.End();
 
