@@ -7,6 +7,7 @@ namespace Template
     {
         protected Texture2D texture;
         protected Vector2 position;
+        protected Vector2 velocity;
         protected Rectangle rectangle;
         protected Rectangle sourceRectangle;
         protected Vector2 leftOrigin;
@@ -40,6 +41,11 @@ namespace Template
         {
             get { return position; }
             set { position = value; }
+        }
+        public Vector2 Velocity
+        {
+            get { return velocity; }
+            set { velocity = value; }
         }
         public float Rotation
         {

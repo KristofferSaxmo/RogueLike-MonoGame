@@ -18,8 +18,6 @@ namespace Template
         List<Bullet> bullets = new List<Bullet>();
         List<Wall> walls = new List<Wall>();
 
-        Rectangle recordPlayerRec;
-
         KeyboardState keyboardState;
         MouseState mouseState;
         bool isTurnedLeft;
@@ -72,8 +70,7 @@ namespace Template
             if (keyboardState.IsKeyDown(Keys.Escape))
                 Exit();
 
-            recordPlayerRec = player.Rectangle;
-            player.Update();
+            player.Update(walls);
 
             if (mouseState.X < player.Position.X + (player.Rectangle.Width) / 2) // Is the player turned left?
             {
@@ -95,26 +92,6 @@ namespace Template
 
             for (int i = 0; i < walls.Count; i++) // Kollision med väggar
             {
-                if (player.Rectangle.Intersects(walls[i].Rectangle) && recordPlayerRec.Left < walls[i].Rectangle.Left) // Left wall
-                    player.Position = new Vector2(
-                        walls[i].Rectangle.Left - player.Rectangle.Width, // X
-                        player.Position.Y); // Y
-
-                else if (player.Rectangle.Intersects(walls[i].Rectangle) && recordPlayerRec.Right > walls[i].Rectangle.Right) // Right wall
-                    player.Position = new Vector2(
-                        walls[i].Rectangle.Right, // X
-                        player.Position.Y); // Y
-
-                else if (player.Rectangle.Intersects(walls[i].Rectangle) && recordPlayerRec.Top < walls[i].Rectangle.Top) // Top Wall
-                    player.Position = new Vector2(
-                        player.Position.X, // X
-                        walls[i].Rectangle.Top - player.Rectangle.Height); // Y
-
-                else if (player.Rectangle.Intersects(walls[i].Rectangle) && recordPlayerRec.Bottom > walls[i].Rectangle.Bottom) // Bottom Wall
-                    player.Position = new Vector2(
-                        player.Position.X, // X
-                        walls[i].Rectangle.Bottom); // Y
-
                 for (int j = 0; j < bullets.Count; j++)
                 {
                     if (walls[i].Rectangle.Intersects(bullets[j].Rectangle)) // Platform & Bullet collision
