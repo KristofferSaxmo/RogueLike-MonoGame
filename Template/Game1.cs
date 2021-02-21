@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using Template.Sprites;
 
 namespace Template
 {
@@ -10,10 +11,13 @@ namespace Template
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        Texture2D defaultTex, crosshairTex, gunTex, bulletTex;
+        Color grass = new Color(36, 73, 67);
 
+        Texture2D defaultTex, crosshairTex, gunTex, bulletTex, telepad_baseTex, telepad_crystalTex;
         Player player;
         Gun gun;
+        Telepad_Base telepad_base;
+        Telepad_Crystal telepad_crystal;
         Camera camera;
         List<Bullet> bullets = new List<Bullet>();
         List<Wall> walls = new List<Wall>();
@@ -49,15 +53,23 @@ namespace Template
             crosshairTex = Content.Load<Texture2D>("crosshair");
 
             bulletTex = Content.Load<Texture2D>("bullet");
+
             gunTex = Content.Load<Texture2D>("gunLeft");
             gun = new Gun(gunTex, 1, 30);
-            walls.Add(new Wall(defaultTex, new Vector2(400, 400), new Point(200, 200)));
-            walls.Add(new Wall(defaultTex, new Vector2(600, 400), new Point(200, 200)));
-            walls.Add(new Wall(defaultTex, new Vector2(600, 600), new Point(200, 200)));
-            walls.Add(new Wall(defaultTex, new Vector2(800, 400), new Point(200, 200)));
-            walls.Add(new Wall(defaultTex, new Vector2(600, 200), new Point(200, 200)));
-            walls.Add(new Wall(defaultTex, new Vector2(1000, 400), new Point(200, 200)));
-            walls.Add(new Wall(defaultTex, new Vector2(1225, 400), new Point(200, 200)));
+
+            telepad_baseTex = Content.Load<Texture2D>("telepad_base-sheet");
+            telepad_base = new Telepad_Base(telepad_baseTex, new Vector2(200, 200), 20, 1, 4, 2);
+
+            telepad_crystalTex = Content.Load<Texture2D>("telepad_crystal-sheet");
+            telepad_crystal = new Telepad_Crystal(telepad_crystalTex, new Vector2(200, 200), 20, 1, 4, 2);
+
+            //walls.Add(new Wall(defaultTex, new Vector2(400, 400), new Point(200, 200)));
+            //walls.Add(new Wall(defaultTex, new Vector2(600, 400), new Point(200, 200)));
+            //walls.Add(new Wall(defaultTex, new Vector2(600, 600), new Point(200, 200)));
+            //walls.Add(new Wall(defaultTex, new Vector2(800, 400), new Point(200, 200)));
+            //walls.Add(new Wall(defaultTex, new Vector2(600, 200), new Point(200, 200)));
+            //walls.Add(new Wall(defaultTex, new Vector2(1000, 400), new Point(200, 200)));
+            //walls.Add(new Wall(defaultTex, new Vector2(1225, 400), new Point(200, 200)));
         }
 
         protected override void UnloadContent() { }
@@ -105,6 +117,9 @@ namespace Template
 
             gun.Update(camera, camera.Position, player.Position, gunTex);
 
+            telepad_base.Update();
+            telepad_crystal.Update();
+
             camera.MoveCamera(player.Position);
 
             camera.UpdateCamera(GraphicsDevice.Viewport);
@@ -114,27 +129,31 @@ namespace Template
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(grass); // Draw background
 
-            spriteBatch.Begin(transformMatrix: camera.Transform);
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null, null, camera.Transform);
 
-            for (int i = 0; i < bullets.Count; i++) // Draw bullets
-            {
-                bullets[i].Draw(spriteBatch);
-            }
+            telepad_base.Draw(spriteBatch); // Draw telepad base
 
-            player.Draw(spriteBatch);
-
-            for (int i = 0; i < walls.Count; i++)
-            {
-                walls[i].Draw(spriteBatch);
-            }
+            player.Draw(spriteBatch); // Draw player
 
             if (isTurnedLeft == true)
                 gun.DrawLeft(spriteBatch); // Draw left gun
 
             else
                 gun.DrawRight(spriteBatch); // Draw right gun     
+
+            telepad_crystal.Draw(spriteBatch);
+
+            for (int i = 0; i < bullets.Count; i++) // Draw bullets
+            {
+                bullets[i].Draw(spriteBatch);
+            }
+
+            for (int i = 0; i < walls.Count; i++) // Draw walls
+            {
+                walls[i].Draw(spriteBatch);
+            }
 
             spriteBatch.End();
 

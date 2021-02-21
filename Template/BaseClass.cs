@@ -77,8 +77,6 @@ namespace Template
             get { return rateOfFire; }
             set { rateOfFire = value; }
         }
-
-        public virtual void Update() { }
         public virtual void Draw(SpriteBatch spriteBatch) { }
     }
 }
