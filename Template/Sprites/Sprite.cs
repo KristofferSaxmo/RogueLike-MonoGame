@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Template
+namespace Template.Sprites
 {
-    class BaseClass
+    class Sprite
     {
         protected Texture2D texture;
         protected Vector2 position;

@@ -4,9 +4,9 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 
-namespace Template.Sprites
+namespace Template.Sprites.PlayerRelated
 {
-    class Gun : BaseClass
+    class Gun : Sprite
     {
         float leftRotation;
         float rightRotation;

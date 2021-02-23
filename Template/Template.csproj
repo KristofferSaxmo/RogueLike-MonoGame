@@ -42,18 +42,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Animation.cs" />
-    <Compile Include="BaseClass.cs" />
-    <Compile Include="Sprites\Bullet.cs" />
+    <Compile Include="Sprites\Sprite.cs" />
+    <Compile Include="Sprites\PlayerRelated\Bullet.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="Sprites\Gun.cs" />
-    <Compile Include="Layout.cs" />
-    <Compile Include="Sprites\Player.cs" />
+    <Compile Include="Sprites\PlayerRelated\Gun.cs" />
+    <Compile Include="Sprites\PlayerRelated\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sprites\Telepad_Base.cs" />
-    <Compile Include="Sprites\Telepad_Crystal.cs" />
-    <Compile Include="Sprites\Wall.cs" />
+    <Compile Include="Sprites\WorldGen\Telepad_Base.cs" />
+    <Compile Include="Sprites\WorldGen\Telepad_Crystal.cs" />
+    <Compile Include="Sprites\WorldGen\Wall.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Template.Sprites
+namespace Template.Sprites.PlayerRelated
 {
-    class Bullet : BaseClass
+    class Bullet : Sprite
     {
         Vector2 origin = new Vector2(9, 4);
         public Bullet(Texture2D bulletTex, Vector2 bulletPos, Point size, float bulletRot, Vector2 bulletDir, float bulletSpeed)

@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Template.Sprites
+namespace Template.Sprites.WorldGen
 {
-    class Telepad_Base : BaseClass
+    class Telepad_Base : Sprite
     {
         private Animation animation;
         public Telepad_Base(Texture2D texture, Vector2 position, int frameTime, int rows, int cols, int scale)

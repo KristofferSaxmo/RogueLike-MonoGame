@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Template.Sprites
+namespace Template.Sprites.WorldGen
 {
-    class Telepad_Crystal : BaseClass
+    class Telepad_Crystal : Sprite
     {
         private Animation animation;
         public Telepad_Crystal(Texture2D texture, Vector2 position, int frameTime, int rows, int cols, int scale)

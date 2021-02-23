@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using Template.Sprites;
+using Template.Sprites.PlayerRelated;
+using Template.Sprites.WorldGen;
 
 namespace Template
 {
@@ -58,18 +60,18 @@ namespace Template
             gun = new Gun(gunTex, 1, 30);
 
             telepad_baseTex = Content.Load<Texture2D>("telepad_base-sheet");
-            telepad_base = new Telepad_Base(telepad_baseTex, new Vector2(200, 200), 20, 1, 4, 2);
+            telepad_base = new Telepad_Base(telepad_baseTex, new Vector2(0, 0), 20, 1, 4, 2);
 
             telepad_crystalTex = Content.Load<Texture2D>("telepad_crystal-sheet");
-            telepad_crystal = new Telepad_Crystal(telepad_crystalTex, new Vector2(200, 200), 20, 1, 4, 2);
+            telepad_crystal = new Telepad_Crystal(telepad_crystalTex, new Vector2(0, 0), 20, 1, 4, 2);
 
-            //walls.Add(new Wall(defaultTex, new Vector2(400, 400), new Point(200, 200)));
-            //walls.Add(new Wall(defaultTex, new Vector2(600, 400), new Point(200, 200)));
-            //walls.Add(new Wall(defaultTex, new Vector2(600, 600), new Point(200, 200)));
-            //walls.Add(new Wall(defaultTex, new Vector2(800, 400), new Point(200, 200)));
-            //walls.Add(new Wall(defaultTex, new Vector2(600, 200), new Point(200, 200)));
-            //walls.Add(new Wall(defaultTex, new Vector2(1000, 400), new Point(200, 200)));
-            //walls.Add(new Wall(defaultTex, new Vector2(1225, 400), new Point(200, 200)));
+            walls.Add(new Wall(defaultTex, new Vector2(400, 400), new Point(200, 200)));
+            walls.Add(new Wall(defaultTex, new Vector2(600, 400), new Point(200, 200)));
+            walls.Add(new Wall(defaultTex, new Vector2(600, 600), new Point(200, 200)));
+            walls.Add(new Wall(defaultTex, new Vector2(800, 400), new Point(200, 200)));
+            walls.Add(new Wall(defaultTex, new Vector2(600, 200), new Point(200, 200)));
+            walls.Add(new Wall(defaultTex, new Vector2(1000, 400), new Point(200, 200)));
+            walls.Add(new Wall(defaultTex, new Vector2(1225, 400), new Point(200, 200)));
         }
 
         protected override void UnloadContent() { }

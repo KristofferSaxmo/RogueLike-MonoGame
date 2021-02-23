@@ -2,10 +2,11 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using Template.Sprites.WorldGen;
 
 namespace Template.Sprites
 {
-    class Player : BaseClass
+    class Player : Sprite
     {
         public Player(Texture2D playerTex, Vector2 playerPos, Point size)
         {
@@ -17,43 +18,25 @@ namespace Template.Sprites
         {
             KeyboardState keyboardState = Keyboard.GetState();
             if (keyboardState.IsKeyDown(Keys.A)) // Left
-            {
                 velocity.X = -5;
-            }
 
             if (keyboardState.IsKeyDown(Keys.D)) // Right
-            {
                 velocity.X = 5;
-            }
 
             if (keyboardState.IsKeyDown(Keys.W)) // Up
-            {
                 velocity.Y = -5;
-            }
 
             if (keyboardState.IsKeyDown(Keys.S)) // Down
-            {
                 velocity.Y = 5;
-            }
         }
         public void UpdateHitbox()
         {
             rectangle = new Rectangle(position.ToPoint(), rectangle.Size); // Rectangle = Position
         }
-        public void Dash()
-        {
-            KeyboardState keyboardState = Keyboard.GetState();
-            if (keyboardState.IsKeyDown(Keys.Space))
-            {
-
-            }
-        }
 
         public void Update(List<Wall> walls)
         {
             MovePlayer();
-
-            Dash();
 
             foreach (var wall in walls)
             {
