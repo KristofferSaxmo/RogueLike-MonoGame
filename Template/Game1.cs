@@ -15,11 +15,12 @@ namespace Template
 
         Color grass = new Color(36, 73, 67);
 
-        Texture2D defaultTex, playerIdleLeftTex, playerIdleRightTex, playerWalkLeftTex, playerWalkRightTex, crosshairTex, gunLeftTex, gunRightTex, bulletTex, telepad_baseTex, telepad_crystalTex;
+        Texture2D defaultTex, playerIdleLeftTex, playerIdleRightTex, playerWalkLeftTex, playerWalkRightTex, playerShadowTex, crosshairTex, gunLeftTex, gunRightTex, bulletTex, telepad_baseTex, telepad_crystalTex;
         Player player;
+        Player_Shadow playerShadow;
         Gun gun;
-        Telepad_Base telepad_base;
-        Telepad_Crystal telepad_crystal;
+        Telepad_Base telepadBase;
+        Telepad_Crystal telepadCrystal;
         Camera camera;
         List<Bullet> bullets = new List<Bullet>();
         List<Wall> walls = new List<Wall>();
@@ -54,8 +55,12 @@ namespace Template
             playerIdleRightTex = Content.Load<Texture2D>("player_idle_right");
             playerWalkLeftTex = Content.Load<Texture2D>("player_walk_left");
             playerWalkRightTex = Content.Load<Texture2D>("player_walk_right");
+            
+            playerShadowTex = Content.Load<Texture2D>("player-shadow");
 
             player = new Player(playerIdleLeftTex, playerWalkLeftTex, playerWalkRightTex, new Vector2(0, 0), 10, 1, 4, 3);
+
+            playerShadow = new Player_Shadow(playerShadowTex, 3);
 
             crosshairTex = Content.Load<Texture2D>("crosshair");
 
@@ -66,10 +71,10 @@ namespace Template
             gun = new Gun(gunLeftTex, 1, 30);
 
             telepad_baseTex = Content.Load<Texture2D>("telepad_base-sheet");
-            telepad_base = new Telepad_Base(telepad_baseTex, new Vector2(0, 0), 30, 1, 4, 3);
+            telepadBase = new Telepad_Base(telepad_baseTex, new Vector2(0, 0), 30, 1, 4, 3);
 
             telepad_crystalTex = Content.Load<Texture2D>("telepad_crystal-sheet");
-            telepad_crystal = new Telepad_Crystal(telepad_crystalTex, new Vector2(0, 0), 15, 1, 4, 3);
+            telepadCrystal = new Telepad_Crystal(telepad_crystalTex, new Vector2(0, 0), 15, 1, 4, 3);
 
             walls.Add(new Wall(defaultTex, new Vector2(400, 400), new Point(200, 200)));
             walls.Add(new Wall(defaultTex, new Vector2(600, 400), new Point(200, 200)));
@@ -91,6 +96,7 @@ namespace Template
                 Exit();
 
             player.Update(walls, isFacingLeft);
+            playerShadow.Update(player.Position);
 
             if (camera.GetWorldPosition(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)).X < player.Position.X + (player.Rectangle.Width) / 2) // Is the player turned left?
             {
@@ -126,8 +132,8 @@ namespace Template
             else
                 gun.Update(camera, player.Position, gunRightTex);
 
-            telepad_base.Update();
-            telepad_crystal.Update();
+            telepadBase.Update();
+            telepadCrystal.Update();
 
             camera.MoveCamera(player.Position);
 
@@ -142,7 +148,14 @@ namespace Template
 
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null, null, camera.Transform);
 
-            telepad_base.Draw(spriteBatch); // Draw telepad base
+            playerShadow.Draw(spriteBatch); // Draw player shadow
+
+            telepadBase.Draw(spriteBatch); // Draw telepad base
+
+            for (int i = 0; i < walls.Count; i++) // Draw walls
+            {
+                walls[i].Draw(spriteBatch);
+            }
 
             if (isFacingLeft)
             {
@@ -156,16 +169,11 @@ namespace Template
             }
   
 
-            telepad_crystal.Draw(spriteBatch);
+            telepadCrystal.Draw(spriteBatch);
 
             for (int i = 0; i < bullets.Count; i++) // Draw bullets
             {
                 bullets[i].Draw(spriteBatch);
-            }
-
-            for (int i = 0; i < walls.Count; i++) // Draw walls
-            {
-                walls[i].Draw(spriteBatch);
             }
 
             spriteBatch.End();

@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Animation.cs" />
+    <Compile Include="Sprites\PlayerRelated\Player_Shadow.cs" />
     <Compile Include="Sprites\Sprite.cs" />
     <Compile Include="Sprites\PlayerRelated\Bullet.cs" />
     <Compile Include="Camera.cs" />

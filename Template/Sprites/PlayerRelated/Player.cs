@@ -15,8 +15,9 @@ namespace Template.Sprites
             walkLeftAnimation = new Animation(walkLeftTex, frameTime, rows, cols, scale);
             walkRightAnimation = new Animation(walkRightTex, frameTime, rows, cols, scale);
             this.position = position;
+            this.scale = scale;
             rectangle = new Rectangle(position.ToPoint(), new Point(texture.Width * scale, texture.Height * scale));
-            hitbox = rectangle;
+            hitbox = new Rectangle((int)position.X, (int)position.Y + 21 * scale, 11 * scale, 7 * scale);
         }
         public void MovePlayer()
         {
@@ -36,6 +37,7 @@ namespace Template.Sprites
         public void UpdateHitbox()
         {
             rectangle = new Rectangle(position.ToPoint(), rectangle.Size); // Rectangle = Position
+            hitbox = new Rectangle((int)position.X, (int)position.Y + 21 * scale, 11 * scale, 7 * scale);
         }
 
         public void Update(List<Wall> walls, bool isFacingLeft)
@@ -90,34 +92,34 @@ namespace Template.Sprites
 
         protected bool IsTouchingLeft(Wall wall)
         {
-            return rectangle.Right + velocity.X > wall.Rectangle.Left &&
-              rectangle.Left < wall.Rectangle.Left &&
-              rectangle.Bottom > wall.Rectangle.Top &&
-              rectangle.Top < wall.Rectangle.Bottom;
+            return hitbox.Right + velocity.X > wall.Rectangle.Left &&
+              hitbox.Left < wall.Rectangle.Left &&
+              hitbox.Bottom > wall.Rectangle.Top &&
+              hitbox.Top < wall.Rectangle.Bottom;
         }
 
         protected bool IsTouchingRight(Wall wall)
         {
-            return rectangle.Left + velocity.X < wall.Rectangle.Right &&
-              rectangle.Right > wall.Rectangle.Right &&
-              rectangle.Bottom > wall.Rectangle.Top &&
-              rectangle.Top < wall.Rectangle.Bottom;
+            return hitbox.Left + velocity.X < wall.Rectangle.Right &&
+              hitbox.Right > wall.Rectangle.Right &&
+              hitbox.Bottom > wall.Rectangle.Top &&
+              hitbox.Top < wall.Rectangle.Bottom;
         }
 
         protected bool IsTouchingTop(Wall wall)
         {
-            return rectangle.Bottom + velocity.Y > wall.Rectangle.Top &&
-              rectangle.Top < wall.Rectangle.Top &&
-              rectangle.Right > wall.Rectangle.Left &&
-              rectangle.Left < wall.Rectangle.Right;
+            return hitbox.Bottom + velocity.Y > wall.Rectangle.Top &&
+              hitbox.Top < wall.Rectangle.Top &&
+              hitbox.Right > wall.Rectangle.Left &&
+              hitbox.Left < wall.Rectangle.Right;
         }
 
         protected bool IsTouchingBottom(Wall wall)
         {
-            return rectangle.Top + velocity.Y < wall.Rectangle.Bottom &&
-              rectangle.Bottom > wall.Rectangle.Bottom &&
-              rectangle.Right > wall.Rectangle.Left &&
-              rectangle.Left < wall.Rectangle.Right;
+            return hitbox.Top + velocity.Y < wall.Rectangle.Bottom &&
+              hitbox.Bottom > wall.Rectangle.Bottom &&
+              hitbox.Right > wall.Rectangle.Left &&
+              hitbox.Left < wall.Rectangle.Right;
         }
     }
 }

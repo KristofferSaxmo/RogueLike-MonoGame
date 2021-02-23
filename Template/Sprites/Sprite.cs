@@ -24,6 +24,8 @@ namespace Template.Sprites
         protected int health;
         protected int damage;
         protected int rateOfFire;
+        protected int scale;
+        protected Point size;
 
         public Rectangle Rectangle
         {
@@ -86,6 +88,16 @@ namespace Template.Sprites
         {
             get { return rateOfFire; }
             set { rateOfFire = value; }
+        }
+        public int Scale
+        {
+            get { return scale; }
+            set { scale = value; }
+        }
+        public Point Size
+        {
+            get { return size; }
+            set { size = value; }
         }
 
         public virtual void Draw(SpriteBatch spriteBatch) { }
