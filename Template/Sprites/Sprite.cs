@@ -14,6 +14,7 @@ namespace Template.Sprites
         protected Vector2 position;
         protected Vector2 velocity;
         protected Rectangle rectangle;
+        protected Rectangle hitbox;
         protected Rectangle sourceRectangle;
         protected Vector2 leftOrigin;
         protected Vector2 rightOrigin;
@@ -27,6 +28,10 @@ namespace Template.Sprites
         public Rectangle Rectangle
         {
             get { return rectangle; }
+        }
+        public Rectangle Hitbox
+        {
+            get { return hitbox; }
         }
         public Rectangle SourceRectangle
         {
@@ -84,5 +89,39 @@ namespace Template.Sprites
         }
 
         public virtual void Draw(SpriteBatch spriteBatch) { }
+
+        #region Collision
+        protected bool IsTouchingLeft(Sprite sprite)
+        {
+            return this.hitbox.Right + this.velocity.X > sprite.hitbox.Left &&
+              this.hitbox.Left < sprite.hitbox.Left &&
+              this.hitbox.Bottom > sprite.hitbox.Top &&
+              this.hitbox.Top < sprite.hitbox.Bottom;
+        }
+
+        protected bool IsTouchingRight(Sprite sprite)
+        {
+            return this.hitbox.Left + this.velocity.X < sprite.hitbox.Right &&
+              this.hitbox.Right > sprite.hitbox.Right &&
+              this.hitbox.Bottom > sprite.hitbox.Top &&
+              this.hitbox.Top < sprite.hitbox.Bottom;
+        }
+
+        protected bool IsTouchingTop(Sprite sprite)
+        {
+            return this.hitbox.Bottom + this.velocity.Y > sprite.hitbox.Top &&
+              this.hitbox.Top < sprite.hitbox.Top &&
+              this.hitbox.Right > sprite.hitbox.Left &&
+              this.hitbox.Left < sprite.hitbox.Right;
+        }
+
+        protected bool IsTouchingBottom(Sprite sprite)
+        {
+            return this.hitbox.Top + this.velocity.Y < sprite.hitbox.Bottom &&
+              this.hitbox.Bottom > sprite.hitbox.Bottom &&
+              this.hitbox.Right > sprite.hitbox.Left &&
+              this.hitbox.Left < sprite.hitbox.Right;
+        }
+        #endregion
     }
 }

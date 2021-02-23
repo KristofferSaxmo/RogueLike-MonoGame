@@ -9,6 +9,7 @@ namespace Template.Sprites.WorldGen
         {
             this.position = position;
             rectangle = new Rectangle(position.ToPoint(), size);
+            hitbox = rectangle;
         }
         public override void Draw(SpriteBatch spriteBatch)
         {

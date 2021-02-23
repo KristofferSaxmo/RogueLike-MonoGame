@@ -12,6 +12,7 @@ namespace Template.Sprites
         {
             base.position = position;
             rectangle = new Rectangle(position.ToPoint(), size);
+            hitbox = rectangle;
         }
         public void MovePlayer()
         {

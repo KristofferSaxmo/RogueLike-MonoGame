@@ -117,7 +117,7 @@ namespace Template
             }
             player.UpdateHitbox();
 
-            gun.Update(camera, camera.Position, player.Position, gunTex);
+            gun.Update(camera, player.Position, gunTex);
 
             telepad_base.Update();
             telepad_crystal.Update();
