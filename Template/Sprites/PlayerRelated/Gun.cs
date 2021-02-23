@@ -64,11 +64,11 @@ namespace Template.Sprites.PlayerRelated
             rightRotation = (float)Math.Atan2(direction.Y, direction.X);          // Right angle
 
         }
-        public void DrawRight(SpriteBatch spriteBatch)
+        public void DrawRight(SpriteBatch spriteBatch, Texture2D texture)
         {
             spriteBatch.Draw(texture, new Vector2(position.X + 20, position.Y + 12), sourceRectangle, Color.White, rightRotation, rightOrigin, 1.0f, SpriteEffects.None, 1);
         }
-        public void DrawLeft(SpriteBatch spriteBatch)
+        public void DrawLeft(SpriteBatch spriteBatch, Texture2D texture)
         {
             spriteBatch.Draw(texture, new Vector2(position.X + 10, position.Y + 12), sourceRectangle, Color.White, leftRotation, leftOrigin, 1.0f, SpriteEffects.None, 1);
         }

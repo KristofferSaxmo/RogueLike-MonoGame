@@ -8,10 +8,14 @@ namespace Template.Sprites
 {
     class Player : Sprite
     {
-        public Player(Texture2D texture, Vector2 position, Point size) : base(texture)
+        private Animation walkLeftAnimation, walkRightAnimation;
+        private bool isFacingLeft, walking;
+        public Player(Texture2D texture, Texture2D walkLeftTex, Texture2D walkRightTex, Vector2 position, int frameTime, int rows, int cols, int scale) : base(texture)
         {
-            base.position = position;
-            rectangle = new Rectangle(position.ToPoint(), size);
+            walkLeftAnimation = new Animation(walkLeftTex, frameTime, rows, cols, scale);
+            walkRightAnimation = new Animation(walkRightTex, frameTime, rows, cols, scale);
+            this.position = position;
+            rectangle = new Rectangle(position.ToPoint(), new Point(texture.Width * scale, texture.Height * scale));
             hitbox = rectangle;
         }
         public void MovePlayer()
@@ -34,7 +38,7 @@ namespace Template.Sprites
             rectangle = new Rectangle(position.ToPoint(), rectangle.Size); // Rectangle = Position
         }
 
-        public void Update(List<Wall> walls)
+        public void Update(List<Wall> walls, bool isFacingLeft)
         {
             MovePlayer();
 
@@ -49,15 +53,39 @@ namespace Template.Sprites
                     velocity.Y = 0;
             }
 
+            this.isFacingLeft = isFacingLeft;
+
+            if (velocity.X != 0 || velocity.Y != 0)
+                walking = true;
+            else
+                walking = false;
+
+            if (walking)
+            {
+                if (isFacingLeft)
+                    walkLeftAnimation.Update();
+                else
+                    walkRightAnimation.Update();
+            }
+
             position += velocity;
 
             velocity = Vector2.Zero;
 
             UpdateHitbox();
         }
-        public override void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, Texture2D texture)
         {
-            spriteBatch.Draw(texture, rectangle, Color.Purple);
+
+            if (walking)
+            {
+                if(isFacingLeft)
+                    walkLeftAnimation.Draw(spriteBatch, position);
+                else
+                    walkRightAnimation.Draw(spriteBatch, position);
+                return;
+            }
+            spriteBatch.Draw(texture, rectangle, Color.White);
         }
 
         protected bool IsTouchingLeft(Wall wall)

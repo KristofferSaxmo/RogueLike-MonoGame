@@ -13,7 +13,7 @@ namespace Template.Sprites.WorldGen
         private Animation animation;
         public Telepad_Base(Texture2D texture, Vector2 position, int frameTime, int rows, int cols, int scale) : base(texture)
         {
-            animation = new Animation(texture, position, frameTime, rows, cols, scale);
+            animation = new Animation(texture, frameTime, rows, cols, scale);
             this.position = position;
         }
         public void Update()
