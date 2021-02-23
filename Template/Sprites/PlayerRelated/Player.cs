@@ -8,11 +8,10 @@ namespace Template.Sprites
 {
     class Player : Sprite
     {
-        public Player(Texture2D playerTex, Vector2 playerPos, Point size)
+        public Player(Texture2D texture, Vector2 position, Point size) : base(texture)
         {
-            texture = playerTex;
-            position = playerPos;
-            rectangle = new Rectangle(playerPos.ToPoint(), size);
+            base.position = position;
+            rectangle = new Rectangle(position.ToPoint(), size);
         }
         public void MovePlayer()
         {

@@ -6,15 +6,14 @@ namespace Template.Sprites.PlayerRelated
     class Bullet : Sprite
     {
         Vector2 origin = new Vector2(9, 4);
-        public Bullet(Texture2D bulletTex, Vector2 bulletPos, Point size, float bulletRot, Vector2 bulletDir, float bulletSpeed)
+        public Bullet(Texture2D texture, Vector2 position, Point size, float rotation, Vector2 direction, float speed) : base(texture)
         {
-            sourceRectangle = new Rectangle(0, 0, bulletTex.Width, bulletTex.Height);
-            texture = bulletTex;
-            position = bulletPos;
-            rectangle = new Rectangle(bulletPos.ToPoint(), size);
-            rotation = bulletRot;
-            direction = bulletDir;
-            speed = bulletSpeed;
+            sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
+            this.position = position;
+            rectangle = new Rectangle(position.ToPoint(), size);
+            this.rotation = rotation;
+            this.direction = direction;
+            this.speed = speed;
         }
         public void Move()
         {

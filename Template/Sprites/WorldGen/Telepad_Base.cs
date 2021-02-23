@@ -11,7 +11,7 @@ namespace Template.Sprites.WorldGen
     class Telepad_Base : Sprite
     {
         private Animation animation;
-        public Telepad_Base(Texture2D texture, Vector2 position, int frameTime, int rows, int cols, int scale)
+        public Telepad_Base(Texture2D texture, Vector2 position, int frameTime, int rows, int cols, int scale) : base(texture)
         {
             animation = new Animation(texture, position, frameTime, rows, cols, scale);
             this.position = position;

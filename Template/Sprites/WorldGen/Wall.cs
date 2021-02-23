@@ -5,11 +5,10 @@ namespace Template.Sprites.WorldGen
 {
     class Wall : Sprite
     {
-        public Wall(Texture2D wallTex, Vector2 wallPos, Point size)
+        public Wall(Texture2D texture, Vector2 position, Point size) : base(texture)
         {
-            texture = wallTex;
-            position = wallPos;
-            rectangle = new Rectangle(wallPos.ToPoint(), size);
+            this.position = position;
+            rectangle = new Rectangle(position.ToPoint(), size);
         }
         public override void Draw(SpriteBatch spriteBatch)
         {

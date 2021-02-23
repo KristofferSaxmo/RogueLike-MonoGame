@@ -6,6 +6,11 @@ namespace Template.Sprites
     class Sprite
     {
         protected Texture2D texture;
+        public Sprite(Texture2D texture)
+        {
+            this.texture = texture;
+        }
+
         protected Vector2 position;
         protected Vector2 velocity;
         protected Rectangle rectangle;
@@ -77,6 +82,7 @@ namespace Template.Sprites
             get { return rateOfFire; }
             set { rateOfFire = value; }
         }
+
         public virtual void Draw(SpriteBatch spriteBatch) { }
     }
 }

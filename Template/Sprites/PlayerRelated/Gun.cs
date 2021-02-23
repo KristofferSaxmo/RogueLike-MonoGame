@@ -16,13 +16,13 @@ namespace Template.Sprites.PlayerRelated
 
         int shootCooldown;
 
-        public Gun(Texture2D gunTex, int gunDamage, int gunRateOfFire)
+        public Gun(Texture2D texture, int damage, int rateOfFire) : base(texture)
         {
-            sourceRectangle = new Rectangle(0, 0, gunTex.Width, gunTex.Height);
-            leftOrigin = new Vector2(gunTex.Width, gunTex.Height / 2);
-            rightOrigin = new Vector2(0, gunTex.Height / 2);
-            damage = gunDamage;
-            rateOfFire = gunRateOfFire;
+            sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
+            leftOrigin = new Vector2(texture.Width, texture.Height / 2);
+            rightOrigin = new Vector2(0, texture.Height / 2);
+            this.damage = damage;
+            this.rateOfFire = rateOfFire;
         }
         public void Shoot(List<Bullet> bullets, Texture2D bulletTex, int gunOffset)
         {
@@ -48,7 +48,7 @@ namespace Template.Sprites.PlayerRelated
             else if (shootCooldown > 0)
                 shootCooldown--;
         }
-        public void Update(Camera camera, Vector2 cameraPos, Vector2 playerPos, Texture2D gunTex)
+        public void Update(Camera camera, Vector2 playerPos, Texture2D gunTex)
         {
             targetWorldPosition = camera.GetWorldPosition(
             new Vector2(Mouse.GetState().X, Mouse.GetState().Y));
