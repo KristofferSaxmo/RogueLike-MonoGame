@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Template.Sprites;
 using Template.Sprites.PlayerRelated;
 using Template.Sprites.WorldGen;
+using Microsoft.Xna.Framework.Media;
 
 namespace Template
 {
@@ -28,6 +29,8 @@ namespace Template
         KeyboardState keyboardState;
         MouseState mouseState;
         bool isFacingLeft = true;
+
+        Song song;
 
         public Game1()
         {
@@ -83,6 +86,12 @@ namespace Template
             walls.Add(new Wall(defaultTex, new Vector2(600, 200), new Point(200, 200)));
             walls.Add(new Wall(defaultTex, new Vector2(1000, 400), new Point(200, 200)));
             walls.Add(new Wall(defaultTex, new Vector2(1225, 400), new Point(200, 200)));
+
+            
+            Song song = Content.Load<Song>("BackgroundMusic");
+            song = Content.Load<Song>("BackgroundMusic");
+            MediaPlayer.Volume -= 0.96f;
+            MediaPlayer.Play(song);
         }
 
         protected override void UnloadContent() { }
