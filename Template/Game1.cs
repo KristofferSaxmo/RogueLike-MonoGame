@@ -95,7 +95,7 @@ namespace Template
             if (keyboardState.IsKeyDown(Keys.Escape))
                 Exit();
 
-            player.Update(walls, isFacingLeft);
+            player.Update(walls);
             playerShadow.Update(player.Position);
 
             if (camera.GetWorldPosition(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)).X < player.Position.X + (player.Rectangle.Width) / 2) // Is the player turned left?

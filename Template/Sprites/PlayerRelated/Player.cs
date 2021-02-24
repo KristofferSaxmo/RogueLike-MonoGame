@@ -9,7 +9,8 @@ namespace Template.Sprites
     class Player : Sprite
     {
         private Animation walkLeftAnimation, walkRightAnimation;
-        private bool isFacingLeft, walking;
+        private bool walking, isFacingLeft;
+        private KeyboardState keyboardState;
         public Player(Texture2D texture, Texture2D walkLeftTex, Texture2D walkRightTex, Vector2 position, int frameTime, int rows, int cols, int scale) : base(texture)
         {
             walkLeftAnimation = new Animation(walkLeftTex, frameTime, rows, cols, scale);
@@ -21,12 +22,17 @@ namespace Template.Sprites
         }
         public void MovePlayer()
         {
-            KeyboardState keyboardState = Keyboard.GetState();
             if (keyboardState.IsKeyDown(Keys.A)) // Left
+            {
                 velocity.X = -5;
+                isFacingLeft = true;
+            }
 
             if (keyboardState.IsKeyDown(Keys.D)) // Right
+            {
                 velocity.X = 5;
+                isFacingLeft = false;
+            }
 
             if (keyboardState.IsKeyDown(Keys.W)) // Up
                 velocity.Y = -5;
@@ -40,8 +46,9 @@ namespace Template.Sprites
             hitbox = new Rectangle((int)position.X, (int)position.Y + 21 * scale, 11 * scale, 7 * scale);
         }
 
-        public void Update(List<Wall> walls, bool isFacingLeft)
+        public void Update(List<Wall> walls)
         {
+            keyboardState = Keyboard.GetState();
             MovePlayer();
 
             foreach (var wall in walls)
@@ -55,10 +62,12 @@ namespace Template.Sprites
                     velocity.Y = 0;
             }
 
-            this.isFacingLeft = isFacingLeft;
-
             if (velocity.X != 0 || velocity.Y != 0)
+            {
                 walking = true;
+
+            }
+
             else
                 walking = false;
 
