@@ -24,7 +24,7 @@ namespace Template.Sprites
         protected int health;
         protected int damage;
         protected int rateOfFire;
-        protected int scale;
+        protected int scale = 3;
         protected Point size;
 
         public Rectangle Rectangle

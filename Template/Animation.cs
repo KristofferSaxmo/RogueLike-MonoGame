@@ -33,6 +33,12 @@ namespace Template
             totalFrames = rows * columns;
         }
 
+        public void Reset()
+        {
+            frameCountdown = FrameTime;
+            currentFrame = 0;
+        }
+
         public void Update()
         {
             if (frameCountdown == 0)

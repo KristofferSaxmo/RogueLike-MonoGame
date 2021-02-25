@@ -30,8 +30,6 @@ namespace Template
         MouseState mouseState;
         bool isFacingLeft = true;
 
-        Song song;
-
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -61,7 +59,7 @@ namespace Template
             
             playerShadowTex = Content.Load<Texture2D>("player-shadow");
 
-            player = new Player(playerIdleLeftTex, playerWalkLeftTex, playerWalkRightTex, new Vector2(0, 0), 10, 1, 4, 3);
+            player = new Player(playerIdleLeftTex, playerWalkLeftTex, playerWalkRightTex, new Vector2(0, 0), 10, 1, 4);
 
             playerShadow = new Player_Shadow(playerShadowTex, 3);
 
@@ -74,10 +72,10 @@ namespace Template
             gun = new Gun(gunLeftTex, 1, 30);
 
             telepad_baseTex = Content.Load<Texture2D>("telepad_base-sheet");
-            telepadBase = new Telepad_Base(telepad_baseTex, new Vector2(0, 0), 30, 1, 4, 3);
+            telepadBase = new Telepad_Base(telepad_baseTex, new Vector2(0, 0), 30, 1, 4);
 
             telepad_crystalTex = Content.Load<Texture2D>("telepad_crystal-sheet");
-            telepadCrystal = new Telepad_Crystal(telepad_crystalTex, new Vector2(0, 0), 15, 1, 4, 3);
+            telepadCrystal = new Telepad_Crystal(telepad_crystalTex, new Vector2(0, 0), 15, 1, 4);
 
             walls.Add(new Wall(defaultTex, new Vector2(400, 400), new Point(200, 200)));
             walls.Add(new Wall(defaultTex, new Vector2(600, 400), new Point(200, 200)));
@@ -104,7 +102,7 @@ namespace Template
             if (keyboardState.IsKeyDown(Keys.Escape))
                 Exit();
 
-            player.Update(walls);
+            player.Update(walls, isFacingLeft);
             playerShadow.Update(player.Position);
 
             if (camera.GetWorldPosition(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)).X < player.Position.X + (player.Rectangle.Width) / 2) // Is the player turned left?

@@ -11,12 +11,11 @@ namespace Template.Sprites
         private Animation walkLeftAnimation, walkRightAnimation;
         private bool walking, isFacingLeft;
         private KeyboardState keyboardState;
-        public Player(Texture2D texture, Texture2D walkLeftTex, Texture2D walkRightTex, Vector2 position, int frameTime, int rows, int cols, int scale) : base(texture)
+        public Player(Texture2D texture, Texture2D walkLeftTex, Texture2D walkRightTex, Vector2 position, int frameTime, int rows, int cols) : base(texture)
         {
             walkLeftAnimation = new Animation(walkLeftTex, frameTime, rows, cols, scale);
             walkRightAnimation = new Animation(walkRightTex, frameTime, rows, cols, scale);
             this.position = position;
-            this.scale = scale;
             rectangle = new Rectangle(position.ToPoint(), new Point(texture.Width * scale, texture.Height * scale));
             hitbox = new Rectangle((int)position.X, (int)position.Y + 21 * scale, 11 * scale, 7 * scale);
         }
@@ -46,7 +45,7 @@ namespace Template.Sprites
             hitbox = new Rectangle((int)position.X, (int)position.Y + 21 * scale, 11 * scale, 7 * scale);
         }
 
-        public void Update(List<Wall> walls)
+        public void Update(List<Wall> walls, bool isFacingLeft)
         {
             keyboardState = Keyboard.GetState();
             MovePlayer();
@@ -62,14 +61,17 @@ namespace Template.Sprites
                     velocity.Y = 0;
             }
 
+            this.isFacingLeft = isFacingLeft;
+
             if (velocity.X != 0 || velocity.Y != 0)
-            {
                 walking = true;
-
-            }
-
             else
+            {
                 walking = false;
+
+                walkLeftAnimation.Reset();
+                walkRightAnimation.Reset();
+            }
 
             if (walking)
             {
