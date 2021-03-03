@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -24,7 +25,7 @@ namespace Template.Sprites.PlayerRelated
             this.damage = damage;
             this.rateOfFire = rateOfFire;
         }
-        public void Shoot(List<Bullet> bullets, Texture2D bulletTex, int gunOffset)
+        public void Shoot(List<Bullet> bullets, Texture2D bulletTex, int gunOffset, SoundEffect effect)
         {
             var mouseState = Mouse.GetState();
             if (shootCooldown == 0 && mouseState.LeftButton == ButtonState.Pressed)
@@ -44,6 +45,7 @@ namespace Template.Sprites.PlayerRelated
                     15)); // Speed
 
                 shootCooldown = rateOfFire;
+                effect.Play(0.1f, 1f, 0.0f);
             }
             else if (shootCooldown > 0)
                 shootCooldown--;

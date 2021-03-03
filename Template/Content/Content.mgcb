@@ -67,6 +67,12 @@
 /processorParam:TextureFormat=Color
 /build:gunRight.png
 
+#begin gunshot.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:gunshot.mp3
+
 #begin mud.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -6,6 +6,7 @@ using Template.Sprites;
 using Template.Sprites.PlayerRelated;
 using Template.Sprites.WorldGen;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Template
 {
@@ -29,6 +30,9 @@ namespace Template
         KeyboardState keyboardState;
         MouseState mouseState;
         bool isFacingLeft = true;
+
+        //Sound
+        SoundEffect effect;
 
         public Game1()
         {
@@ -85,11 +89,14 @@ namespace Template
             walls.Add(new Wall(defaultTex, new Vector2(1000, 400), new Point(200, 200)));
             walls.Add(new Wall(defaultTex, new Vector2(1225, 400), new Point(200, 200)));
 
-            
+         
             Song song = Content.Load<Song>("BackgroundMusic");
             song = Content.Load<Song>("BackgroundMusic");
             MediaPlayer.Volume -= 0.96f;
             MediaPlayer.Play(song);
+            MediaPlayer.IsRepeating = true;
+
+            effect = Content.Load<SoundEffect>("Gunshot");
         }
 
         protected override void UnloadContent() { }
@@ -108,12 +115,12 @@ namespace Template
             if (camera.GetWorldPosition(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)).X < player.Position.X + (player.Rectangle.Width) / 2) // Is the player turned left?
             {
                 isFacingLeft = true; // Yes
-                gun.Shoot(bullets, bulletTex, 0);
+                gun.Shoot(bullets, bulletTex, 0, effect);
             }
             else
             {
                 isFacingLeft = false; // No
-                gun.Shoot(bullets, bulletTex, gunRightTex.Width);
+                gun.Shoot(bullets, bulletTex, gunRightTex.Width, effect);
             }
 
             for (int i = 0; i < bullets.Count; i++) // Move bullets
