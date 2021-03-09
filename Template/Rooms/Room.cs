@@ -25,7 +25,10 @@ namespace Template.Rooms
             {
                 for (int j = 0; j < Map.GetLength(1); j++)
                 {
-
+                    if (Map.GetValue(i, j) == 1)
+                    {
+                        walls.Add(new Wall(wallTex, new Vector2(i * 60, j * 60), new Point(60, 60)));
+                    }
                 }
             }
         }
@@ -33,49 +36,54 @@ namespace Template.Rooms
         {
             Random random = new Random();
             int entity;
-            int roomHeight = Map.GetLength(0) * 60;
-            int roomWidth = Map.GetLength(1) * 60;
 
-            for (int i = 1; i < Map.GetLength(0) - 1; i++)
+            for (int i = 0; i < Map.GetLength(0) - 1; i++)
             {
-                for (int j = 1; j < Map.GetLength(1) - 1; j++)
+                for (int j = 0; j < Map.GetLength(1) - 1; j++)
                 {
-                    entity = random.Next(20);
-                    switch (entity)
+                    if (Map.GetValue(i, j) == 1)
                     {
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                        case 5:
-                        case 6:
-                        case 7:
-                        case 8:
-                        case 9:
-                        case 10:
-                            break;
+                        walls.Add(new Wall(wallTex, new Vector2(i * 60, j * 60), new Point(60, 60)));
+                    }
+                    else
+                    {
+                        entity = random.Next(20);
+                        switch (entity)
+                        {
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                            case 5:
+                            case 6:
+                            case 7:
+                            case 8:
+                            case 9:
+                            case 10:
+                                break;
 
-                        case 11:
-                            Trees.Add(new Tree(treeTex, new Vector2(i * 60, j * 60), new Point(60, 60)));
-                            break;
+                            case 11:
+                                trees.Add(new Tree(treeTex, new Vector2(i * 60, j * 60), new Point(60, 60)));
+                                break;
 
-                        case 12:
-                            break;
-                        case 13:
-                            break;
-                        case 15:
-                            break;
-                        case 16:
-                            break;
-                        case 17:
-                            break;
-                        case 18:
-                            break;
-                        case 19:
-                            break;
-                        case 20:
-                            break;
+                            case 12:
+                                break;
+                            case 13:
+                                break;
+                            case 15:
+                                break;
+                            case 16:
+                                break;
+                            case 17:
+                                break;
+                            case 18:
+                                break;
+                            case 19:
+                                break;
+                            case 20:
+                                break;
+                        }
                     }
                 }
             }
